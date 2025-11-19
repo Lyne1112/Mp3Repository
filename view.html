@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎莅临 - 四川大学陈蕾技能人才创新工作室</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 90%;
+            width: 800px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        .logo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+            letter-spacing: 2px;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #ffeb3b;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s ease-out;
+            font-weight: 500;
+        }
+        
+        .studio-name {
+            font-size: 2rem;
+            margin: 30px 0;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: slideIn 1.5s ease-out;
+            font-weight: 500;
+        }
+        
+        .welcome-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2.5s ease-out;
+            font-weight: 300;
+        }
+        
+        .audio-control {
+            margin: 30px 0;
+            animation: fadeIn 3s ease-out;
+        }
+        
+        .audio-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .audio-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .audio-btn.playing {
+            background: rgba(255, 87, 87, 0.3);
+        }
+        
+        .audio-btn i {
+            font-size: 1.5rem;
+        }
+        
+        .audio-progress {
+            margin-top: 15px;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .audio-progress-bar {
+            height: 100%;
+            background: #ffeb3b;
+            width: 0%;
+            transition: width 0.1s;
+        }
+        
+        .audio-time {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            display: none;
+        }
+        
+        .audio-status {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            display: none;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            font-size: 1rem;
+            opacity: 0.8;
+            animation: fadeIn 3.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            .studio-name { font-size: 1.6rem; }
+            .welcome-text { font-size: 1.2rem; }
+            .container { padding: 30px 20px; }
+        }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.5rem; }
+            .studio-name { font-size: 1.3rem; }
+            .welcome-text { font-size: 1rem; }
+            .logo { width: 100px; height: 100px; }
+            .logo img { width: 70px; height: 70px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://Lyne1112.github.io/Mp3Repository/wecare.png" alt="四川大学logo">
+        </div>
+        <h1>欢迎各位领导、嘉宾</h1>
+        <h2>莅临指导</h2>
+        <div class="studio-name">四川大学陈蕾技能人才创新工作室</div>
+        <div class="welcome-text">
+            感谢各位领导、嘉宾在百忙之中莅临指导<br>
+            我们将以饱满的热情展示工作室的创新成果<br>
+            期待您的宝贵意见与建议
+        </div>
+        <div class="audio-control">
+            <button class="audio-btn" id="audioBtn">
+                <i>▶</i> <span id="audioBtnText">播放欢迎音频</span>
+            </button>
+            <div class="audio-progress" id="audioProgress">
+                <div class="audio-progress-bar" id="audioProgressBar"></div>
+            </div>
+            <div class="audio-time">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+            <div class="audio-status" id="audioStatus">准备播放...</div>
+        </div>
+        <div class="footer">
+            四川大学 · 四川省五一巾帼创新工作室 
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioBtn = document.getElementById('audioBtn');
+            const audioBtnText = document.getElementById('audioBtnText');
+            const audioProgress = document.getElementById('audioProgress');
+            const audioProgressBar = document.getElementById('audioProgressBar');
+            const currentTimeEl = document.getElementById('currentTime');
+            const durationEl = document.getElementById('duration');
+            const audioStatus = document.getElementById('audioStatus');
+            
+            // 创建音频对象
+            const audio = new Audio('https://Lyne1112.github.io/Mp3Repository/first.mp3');
+            
+            // 显示加载状态
+            audioStatus.textContent = '加载音频中...';
+            audioStatus.style.display = 'block';
+            
+            // 音频加载完成
+            audio.addEventListener('loadedmetadata', function() {
+                durationEl.textContent = formatTime(audio.duration);
+                audioStatus.textContent = '准备播放';
+                audioProgress.style.display = 'block';
+                audioTime.style.display = 'flex';
+            });
+            
+            // 音频加载出错
+            audio.addEventListener('error', function() {
+                audioStatus.textContent = '音频加载失败，请检查网络连接';
+                audioBtn.disabled = true;
+            });
+            
+            // 更新进度条
+            audio.addEventListener('timeupdate', function() {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                audioProgressBar.style.width = progress + '%';
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            });
+            
+            // 音频开始播放
+            audio.addEventListener('play', function() {
+                audioBtn.classList.add('playing');
+                audioBtn.innerHTML = '<i>⏸</i> <span id="audioBtnText">暂停播放</span>';
+                audioStatus.textContent = '播放中...';
+            });
+            
+            // 音频暂停
+            audio.addEventListener('pause', function() {
+                audioBtn.classList.remove('playing');
+                audioBtn.innerHTML = '<i>▶</i> <span id="audioBtnText">继续播放</span>';
+                if (!audio.ended) {
+                    audioStatus.textContent = '已暂停';
+                }
+            });
+            
+            // 音频播放结束
+            audio.addEventListener('ended', function() {
+                audioBtn.classList.remove('playing');
+                audioBtn.innerHTML = '<i>▶</i> <span id="audioBtnText">重新播放</span>';
+                audioProgressBar.style.width = '0%';
+                currentTimeEl.textContent = '0:00';
+                audioStatus.textContent = '播放结束';
+                
+                // 3秒后隐藏状态信息
+                setTimeout(() => {
+                    audioStatus.style.display = 'none';
+                }, 3000);
+            });
+            
+            // 按钮点击事件
+            audioBtn.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play().catch(error => {
+                        audioStatus.textContent = '播放失败: ' + error.message;
+                    });
+                } else {
+                    audio.pause();
+                }
+            });
+            
+            // 格式化时间显示
+            function formatTime(seconds) {
+                if (isNaN(seconds)) return '0:00';
+                const min = Math.floor(seconds / 60);
+                const sec = Math.floor(seconds % 60);
+                return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+            }
+            
+            // 点击进度条跳转播放位置
+            audioProgress.addEventListener('click', function(e) {
+                if (audio.duration) {
+                    const rect = audioProgress.getBoundingClientRect();
+                    const percent = (e.clientX - rect.left) / rect.width;
+                    audio.currentTime = percent * audio.duration;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
