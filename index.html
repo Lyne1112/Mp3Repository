@@ -1,11 +1,45 @@
 <!DOCTYPE html>
 <html>
-<body>
-    <audio controls autoplay style="width:100%;">
-        <!-- 替换为你的音频原始链接 -->
-        <source src="https://Lyne1112.github.io/Mp3Repository/file_example.mp3" type="audio/mpeg">
-        您的浏览器不支持音频播放
-     </audio>
-</body>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音频播放页</title>
+    <style>
+        /* 页面整体样式 */
+        body {
+            margin: 0;
+            padding: 40px 20px; /* 上下留白，左右小留白 */
+            background: #f8f8f8; /* 浅灰背景更清爽 */
+            min-height: 100vh; /* 占满屏幕高度 */
+            display: flex; /* 弹性布局居中 */
+            flex-direction: column; /* 垂直排列 */
+            align-items: center; /* 水平居中 */
+            justify-content: center; /* 垂直居中 */
+        }
 
+        /* 播放器容器样式 */
+        .audio-container {
+            width: 80%; /* 播放器宽度为屏幕的80%（不充满屏幕） */
+            max-width: 500px; /* 最大宽度限制（避免大屏幕过宽） */
+            padding: 20px;
+            background: white; /* 白色背景突出播放器 */
+            border-radius: 10px; /* 圆角边框 */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* 轻微阴影增强立体感 */
+        }
+
+        /* 播放器样式 */
+        audio {
+            width: 100%; /* 播放器占满容器宽度（容器已限制80%屏幕宽） */
+            outline: none; /* 去掉默认焦点边框 */
+        }
+    </style>
+</head>
+<body>
+    <div class="audio-container">
+        <audio controls preload="metadata">
+            <source src="https://Lyne1112.github.io/Mp3Repository/file_example.mp3" type="audio/mpeg">
+            <p>您的浏览器不支持音频播放，请点击<a href="https://Lyne1112.github.io/Mp3Repository/file_example.mp3" target="_blank">下载音频</a>后收听</p>
+        </audio>
+    </div>
+</body>
 </html>
+
